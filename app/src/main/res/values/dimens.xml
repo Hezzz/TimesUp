@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="logo_size">120dp</dimen>
+    <dimen name="half_logo">70dp</dimen>
+    <dimen name="name_height">40dp</dimen>
+    <dimen name="text_margin">48dp</dimen>
+    <dimen name="name_width">150dp</dimen>
+</resources>
