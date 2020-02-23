@@ -17,11 +17,14 @@ public class RegistrationActivity extends AppCompatActivity{
     private Button registerButton;
     private EditText username, password, firstname,
         lastname, email, contactNo, confirmPass;
+    DatabaseHelper databaseHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
+
+        databaseHelper = new DatabaseHelper(this);
 
         username = findViewById(R.id.username);
         password = findViewById(R.id.password);
@@ -45,11 +48,25 @@ public class RegistrationActivity extends AppCompatActivity{
                 }
                 else{
                     if(password.getText().toString().equals(confirmPass.getText().toString())){
-                        Intent backLogin = new Intent();
-                        backLogin.putExtra("USERNAME", username.getText().toString());
-                        backLogin.putExtra("PASSWORD", password.getText().toString());
-                        setResult(Activity.RESULT_OK, backLogin);
-                        finish();
+
+                        UserClass user = new UserClass(username.getText().toString(),
+                                password.getText().toString(), firstname.getText().toString(),
+                                lastname.getText().toString(), email.getText().toString(),
+                                contactNo.getText().toString());
+
+                        if (databaseHelper.insertUser(user)) {
+                            Intent backLogin = new Intent();
+                            backLogin.putExtra("USERNAME", username.getText().toString());
+                            backLogin.putExtra("PASSWORD", password.getText().toString());
+                            Toast.makeText(getApplicationContext(), "User created.", Toast.LENGTH_SHORT).show();
+                            setResult(Activity.RESULT_OK, backLogin);
+                            finish();
+                        }
+                        else{
+                            Vibrator vibrator = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE);
+                            vibrator.vibrate(400);
+                            Toast.makeText(getApplicationContext(), "User alreasy exists.", Toast.LENGTH_SHORT).show();
+                        }
                     }
                     else{
                         Vibrator vibrator = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE);
