@@ -2,13 +2,16 @@ package com.example.timesup_final_project;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class LoginActivity extends AppCompatActivity{
 
@@ -34,8 +37,12 @@ public class LoginActivity extends AppCompatActivity{
         loginButton = findViewById(R.id.loginButton);
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view){
-                //go to main activity with intent
+            public void onClick(View view) {
+                if(username.getText().toString().isEmpty() || password.getText().toString().isEmpty()){
+                    Vibrator vibrator = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE);
+                    vibrator.vibrate(400);
+                    Toast.makeText(getApplicationContext(), "Please enter your username/password", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
