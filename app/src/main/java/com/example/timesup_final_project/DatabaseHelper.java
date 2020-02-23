@@ -68,6 +68,6 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
         long result = database.insert(USER_TABLE, null, values);
         if (result == -1) return false;
-        return true;
+        else return true;
     }
 }
