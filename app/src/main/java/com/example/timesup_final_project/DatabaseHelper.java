@@ -49,7 +49,11 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-
+    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVer, int newVer) {
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + USER_TABLE);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TASK_TABLE);
+        onCreate(sqLiteDatabase);
     }
+
+    //public boolean insertUser(String username, String password, String )
 }
