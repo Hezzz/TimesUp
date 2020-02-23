@@ -51,13 +51,13 @@ public class LoginActivity extends AppCompatActivity{
                 }
                 else{
                     if (password.getText().toString().equals(databaseHelper.searchUser(username.getText().toString()))){
-                        Toast.makeText(getApplicationContext(), "Welcome To Time's Up!", Toast.LENGTH_SHORT).show();
-                        username.setText("");
-                        password.setText("");
+                        Toast.makeText(getApplicationContext(), "Welcome To Time's Up! " + username.getText().toString(), Toast.LENGTH_SHORT).show();
                     }
                     else{
                         Vibrator vibrator = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE);
                         vibrator.vibrate(400);
+                        username.setText("");
+                        password.setText("");
                         Toast.makeText(getApplicationContext(), "Wrong username or password.", Toast.LENGTH_SHORT).show();
                     }
                 }

@@ -77,9 +77,10 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         String query = "SELECT " + COL_2 + " FROM " + USER_TABLE + " WHERE "
                 + COL_1 + " = ?";
         Cursor cursor = database.rawQuery(query, new String[]{username + ""});
-        if (cursor != null)
+        if (cursor.getCount() > 0) {
             cursor.moveToFirst();
-
-        return cursor.getString(0);
+            return cursor.getString(cursor.getColumnIndex(COL_2));
+        }
+        else return "false";
     }
 }
