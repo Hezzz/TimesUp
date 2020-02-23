@@ -19,11 +19,17 @@ public class LoginActivity extends AppCompatActivity{
     private Button loginButton;
     private EditText username, password;
     private final int REG_ACTIVITY_REQ = 1;
+    DatabaseHelper databaseHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        databaseHelper = new DatabaseHelper(this);
+
+        username = findViewById(R.id.username_field);
+        password = findViewById(R.id.password_field);
 
         regLink = findViewById(R.id.regLink);
         regLink.setOnClickListener(new View.OnClickListener() {
@@ -43,11 +49,20 @@ public class LoginActivity extends AppCompatActivity{
                     vibrator.vibrate(400);
                     Toast.makeText(getApplicationContext(), "Please enter your username/password", Toast.LENGTH_SHORT).show();
                 }
+                else{
+                    if (password.getText().toString().equals(databaseHelper.searchUser(username.getText().toString()))){
+                        Toast.makeText(getApplicationContext(), "Welcome To Time's Up!", Toast.LENGTH_SHORT).show();
+                        username.setText("");
+                        password.setText("");
+                    }
+                    else{
+                        Vibrator vibrator = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE);
+                        vibrator.vibrate(400);
+                        Toast.makeText(getApplicationContext(), "Wrong username or password.", Toast.LENGTH_SHORT).show();
+                    }
+                }
             }
         });
-
-        username = findViewById(R.id.username_field);
-        password = findViewById(R.id.password_field);
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent regIntent){

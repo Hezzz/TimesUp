@@ -2,6 +2,7 @@ package com.example.timesup_final_project;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -69,5 +70,16 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         long result = database.insert(USER_TABLE, null, values);
         if (result == -1) return false;
         else return true;
+    }
+
+    public String searchUser(String username){
+        SQLiteDatabase database = this.getReadableDatabase();
+        String query = "SELECT " + COL_2 + " FROM " + USER_TABLE + " WHERE "
+                + COL_1 + " = ?";
+        Cursor cursor = database.rawQuery(query, new String[]{username + ""});
+        if (cursor != null)
+            cursor.moveToFirst();
+
+        return cursor.getString(0);
     }
 }
