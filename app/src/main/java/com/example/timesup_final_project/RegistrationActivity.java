@@ -51,6 +51,13 @@ public class RegistrationActivity extends AppCompatActivity{
                         setResult(Activity.RESULT_OK, backLogin);
                         finish();
                     }
+                    else{
+                        Vibrator vibrator = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE);
+                        vibrator.vibrate(400);
+                        Toast.makeText(getApplicationContext(), "Password do not match.", Toast.LENGTH_SHORT).show();
+                        confirmPass.setText("");
+                        password.setText("");
+                    }
                 }
             }
         });
