@@ -12,6 +12,12 @@
         <item name="colorPrimary">@color/backGround</item>
         <item name="colorPrimaryDark">@color/backGround</item>
         <item name="colorAccent">@color/white</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
     </style>
 
 </resources>
