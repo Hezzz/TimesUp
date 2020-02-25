@@ -52,6 +52,9 @@ public class LoginActivity extends AppCompatActivity{
                 else{
                     if (password.getText().toString().equals(databaseHelper.searchUser(username.getText().toString()))){
                         Toast.makeText(getApplicationContext(), "Welcome To Time's Up! " + username.getText().toString(), Toast.LENGTH_SHORT).show();
+                        Intent toMainActivity = new Intent(LoginActivity.this, MainActivity.class);
+                        startActivity(toMainActivity);
+                        finish();
                     }
                     else{
                         Vibrator vibrator = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE);
@@ -65,8 +68,9 @@ public class LoginActivity extends AppCompatActivity{
         });
     }
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent regIntent){
-        if(requestCode == REG_ACTIVITY_REQ){
+    protected void onActivityResult(int requestCode, int resultCode, Intent regIntent) {
+        super.onActivityResult(requestCode, resultCode, regIntent);
+        if (requestCode == REG_ACTIVITY_REQ) {
             if (resultCode == AppCompatActivity.RESULT_OK){
                 username.setText(regIntent.getStringExtra("USERNAME"));
                 password.setText(regIntent.getStringExtra("PASSWORD"));

@@ -14,4 +14,8 @@
     <string name="password">Password</string>
     <string name="confirmPass">Confirm Password</string>
     <string name="register">Register</string>
+    <string name="accnt_info_nav">Account Info</string>
+    <string name="accnt_sett_nav">Account Settings</string>
+    <string name="about_nav">About</string>
+    <string name="logout_nav">Log-out</string>
 </resources>
