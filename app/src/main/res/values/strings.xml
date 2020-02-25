@@ -1,12 +1,12 @@
 <resources>
-    
+
     <string name="app_name">Time\'s Up!</string>
-    
+
     <string name="login"><b>Log-in</b></string>
     <string name="username_hint">Enter username</string>
     <string name="password_hint">Enter password</string>
     <string name="register_link"><u>New User? Register here!</u></string>
-    
+
     <string name="basic_info"><b>Basic Info:</b></string>
     <string name="first_name">First Name</string>
     <string name="last_name">Last Name</string>
@@ -18,12 +18,15 @@
     <string name="confirmPass">Confirm Password</string>
     <string name="register">Register</string>
 
+    <string name="home">Home</string>
     <string name="account">Account</string>
     <string name="accnt_info_nav">Account Info</string>
     <string name="accnt_sett_nav">Account Settings</string>
     <string name="about_nav">About</string>
     <string name="logout_nav">Log-out</string>
-    
+
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
