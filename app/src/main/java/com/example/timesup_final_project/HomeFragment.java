@@ -24,15 +24,7 @@ public class HomeFragment extends Fragment{
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState){
-        Button button = view.findViewById(R.id.button);
-        final TextView textView = view.findViewById(R.id.textView4);
 
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                textView.setText("Nice");
-            }
-        });
     }
 
 }

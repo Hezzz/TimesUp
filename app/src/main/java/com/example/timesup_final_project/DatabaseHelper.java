@@ -83,4 +83,15 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         }
         else return "false";
     }
+
+    public void setUser(String username){
+        SQLiteDatabase database = this.getReadableDatabase();
+        String query = "SELECT " + COL_3 + ", " + COL_4 + ", " +
+                COL_5 + ", " + COL_6 + " FROM " + USER_TABLE + " WHERE "
+                + COL_1 + " = ?";
+        Cursor cursor = database.rawQuery(query, new String[]{username + ""});
+        cursor.moveToFirst();
+        CurrentUser.setUser(cursor.getString(cursor.getColumnIndex(COL_3)), cursor.getString(cursor.getColumnIndex(COL_4)),
+                cursor.getString(cursor.getColumnIndex(COL_5)), cursor.getString(cursor.getColumnIndex(COL_6)));
+    }
 }

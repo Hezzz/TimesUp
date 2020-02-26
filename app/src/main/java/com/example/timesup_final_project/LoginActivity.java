@@ -13,6 +13,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
 public class LoginActivity extends AppCompatActivity{
 
     private TextView regLink;
@@ -51,8 +53,9 @@ public class LoginActivity extends AppCompatActivity{
                 }
                 else{
                     if (password.getText().toString().equals(databaseHelper.searchUser(username.getText().toString()))){
+                        databaseHelper.setUser(username.getText().toString());
                         Intent toMainActivity = new Intent(LoginActivity.this, MainActivity.class);
-                        Toast.makeText(getApplicationContext(), "Welcome To Time's Up! " + username.getText().toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Welcome To Time's Up! " + CurrentUser.getFirstname(), Toast.LENGTH_SHORT).show();
                         startActivity(toMainActivity);
                         finish();
                     }

@@ -8,28 +8,29 @@
     android:gravity="bottom">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/userNameTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/open_sans_semibold"
-        android:text="User Name"
         android:textColor="@color/backGround"
         android:textSize="@dimen/header_name_size" />
 
     <TextView
+        android:id="@+id/emailAddTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/open_sans_semibold"
         android:text="Email Add"
-        android:textSize="@dimen/header_info_size"
         android:textColor="@color/textSecondary"
-        android:fontFamily="@font/open_sans_semibold"/>
+        android:textSize="@dimen/header_info_size" />
 
     <TextView
+        android:id="@+id/contactNoTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/open_sans_semibold"
         android:text="Contact No."
-        android:textSize="@dimen/header_info_size"
         android:textColor="@color/textSecondary"
-        android:fontFamily="@font/open_sans_semibold"/>
+        android:textSize="@dimen/header_info_size" />
 
 </LinearLayout>
