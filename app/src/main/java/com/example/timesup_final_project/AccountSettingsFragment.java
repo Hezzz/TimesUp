@@ -13,15 +13,13 @@ import android.view.ViewGroup;
 public class AccountSettingsFragment extends Fragment {
 
 
-    public AccountSettingsFragment() {
-        // Required empty public constructor
-    }
+    public AccountSettingsFragment() {}
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        ((MainActivity)getActivity()).setActionBarTitle("Account Settings");
         return inflater.inflate(R.layout.fragment_account_settings, container, false);
     }
 

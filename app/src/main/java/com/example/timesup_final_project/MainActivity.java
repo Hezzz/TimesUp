@@ -54,7 +54,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toggle.syncState();
 
         initialize();
-
     }
 
     public void setActionBarTitle(String title){
@@ -91,6 +90,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if(drawerLayout.isDrawerOpen(GravityCompat.START)){
             drawerLayout.closeDrawer(GravityCompat.START);
         }
+        else if(Navigation.findNavController(this, R.id.nav_host_fragment)
+                .getCurrentDestination().getId()!= R.id.homeFragment){
+            NavOptions navOptions = new NavOptions.Builder()
+                    .setPopUpTo(R.id.main_nav, true).build();
+            Navigation.findNavController(this, R.id.nav_host_fragment).navigate(R.id.homeFragment,
+                    null, navOptions);
+        }
         else{
             super.onBackPressed();
         }
@@ -112,6 +118,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
                 break;
             }
+            case R.id.acount_settings:{
+                if(isValidDestination(R.id.accountSettingsFragment)){
+                    Navigation.findNavController(this, R.id.nav_host_fragment).navigate(R.id.accountSettingsFragment);
+                }
+                break;
+            }
+            case R.id.about:{
+                if(isValidDestination(R.id.aboutFragment)){
+                    Navigation.findNavController(this, R.id.nav_host_fragment).navigate(R.id.aboutFragment);
+                }
+            }
         }
         item.setChecked(true);
         drawerLayout.closeDrawer(GravityCompat.START);
@@ -121,6 +138,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private boolean isValidDestination(int destination){
         return destination != Navigation.findNavController(this, R.id.nav_host_fragment)
                 .getCurrentDestination().getId();
-
     }
 }

@@ -21,10 +21,4 @@ public class HomeFragment extends Fragment{
         ((MainActivity)getActivity()).setActionBarTitle("Home");
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
-
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState){
-
-    }
-
 }
