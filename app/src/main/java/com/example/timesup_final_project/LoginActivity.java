@@ -54,6 +54,7 @@ public class LoginActivity extends AppCompatActivity{
                 else{
                     if (password.getText().toString().equals(databaseHelper.searchUser(username.getText().toString()))){
                         databaseHelper.setUser(username.getText().toString());
+                        CurrentUser.setUserName(username.getText().toString());
                         Intent toMainActivity = new Intent(LoginActivity.this, MainActivity.class);
                         Toast.makeText(getApplicationContext(), "Welcome To Time's Up! " + CurrentUser.getFirstname(), Toast.LENGTH_SHORT).show();
                         startActivity(toMainActivity);

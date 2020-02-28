@@ -9,15 +9,67 @@
     android:background="@color/backGround"
     android:layout_marginTop="?attr/actionBarSize">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="YES"
-        android:textColor="@color/white"
+    <ImageView
+        android:id="@+id/about_logo"
+        android:layout_width="@dimen/about_logo_size"
+        android:layout_height="@dimen/about_logo_size"
+        android:src="@drawable/times_up_pic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="@dimen/about_margin" />
+
+    <ImageView
+        android:id="@+id/about_name"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/logo_size"
+        android:src="@drawable/time_up_name_logo"
+        android:layout_marginStart="@dimen/logo_margin"
+        android:layout_marginEnd="@dimen/logo_margin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/about_logo" />
+
+    <TextView
+        android:id="@+id/about_desc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/logo_margin"
+        android:layout_marginEnd="@dimen/logo_margin"
+        android:text="@string/about_desc"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="@dimen/about_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/about_name" />
+
+    <TextView
+        android:id="@+id/trademark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/trademark"
+        android:textColor="@color/colorAccent"
+        android:textSize="@dimen/about_text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="@dimen/default_margin"/>
+
+    <TextView
+        android:id="@+id/updatesdesc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/logo_margin"
+        android:layout_marginEnd="@dimen/logo_margin"
+        android:layout_marginBottom="@dimen/bottom_margin"
+        android:text="@string/updates_desc"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="@dimen/about_text"
+        app:layout_constraintBottom_toTopOf="@+id/trademark"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/about_desc" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 

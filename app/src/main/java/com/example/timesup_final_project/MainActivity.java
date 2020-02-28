@@ -1,6 +1,5 @@
 package com.example.timesup_final_project;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -25,6 +24,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
+    private NavOptions navOptions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +65,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationUI.setupActionBarWithNavController(this, navController, drawerLayout);
         NavigationUI.setupWithNavController(navigationView, navController);
         navigationView.setNavigationItemSelectedListener(this);
+        navOptions = new NavOptions.Builder()
+                .setPopUpTo(R.id.main_nav, true).build();
     }
 
     @Override
@@ -92,8 +94,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         else if(Navigation.findNavController(this, R.id.nav_host_fragment)
                 .getCurrentDestination().getId()!= R.id.homeFragment){
-            NavOptions navOptions = new NavOptions.Builder()
-                    .setPopUpTo(R.id.main_nav, true).build();
             Navigation.findNavController(this, R.id.nav_host_fragment).navigate(R.id.homeFragment,
                     null, navOptions);
         }
@@ -103,13 +103,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(MenuItem item){
         switch(item.getItemId()){
             case R.id.home:{
-                NavOptions navOptions = new NavOptions.Builder()
-                        .setPopUpTo(R.id.main_nav, true).build();
-                Navigation.findNavController(this, R.id.nav_host_fragment).navigate(R.id.homeFragment,
-                        null, navOptions);
+                if (isValidDestination(R.id.homeFragment)) {
+                    Navigation.findNavController(this, R.id.nav_host_fragment).navigate(R.id.homeFragment);
+                }
                 break;
             }
             case R.id.account_info:{

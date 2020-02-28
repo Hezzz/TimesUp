@@ -28,6 +28,17 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="help">Help</string>
+
+    <string name="add_title">Add Title</string>
+    <string name="add_description">Add Description</string>
+    <string name="cancel">CANCEL</string>
+    <string name="add"><u>ADD</u></string>
+    <string name="subscribe"><u><i>Subscribe to get the latest features and updates!</i></u></string>
+
+    <string name="about_desc">Time\'s Up is a deadline manager application developed for students
+        who wish to keep track of the deadlines they must accomplish. A submission as the
+        final project for CS0011 - Mobile Programming.</string>
+    <string name="trademark">Time\'s Up.2020.HJVR.</string>
+    <string name="updates_desc">This is hoped to have more future changes and updates.</string>
 </resources>
