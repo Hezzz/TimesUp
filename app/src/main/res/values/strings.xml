@@ -41,4 +41,9 @@
         final project for CS0011 - Mobile Programming.</string>
     <string name="trademark">Time\'s Up.2020.HJVR.</string>
     <string name="updates_desc">This is hoped to have more future changes and updates.</string>
+
+    <string name="logout_confirmation">Do you want to log-out?</string>
+    <string name="logout">Log-out</string>
+    <string name="yes">Yes</string>
+    <string name="goodbye">Good bye</string>
 </resources>

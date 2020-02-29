@@ -6,8 +6,9 @@
 
     <dimen name="header_name_size">24sp</dimen>
     <dimen name="header_info_size">12sp</dimen>
-    <dimen name="dialog_title_size">24sp</dimen>
-    <dimen name="dialog_desc_size">16sp</dimen>
+    <dimen name="dialog_title_size">20sp</dimen>
+    <dimen name="dialog_desc_size">12sp</dimen>
+    <dimen name="dialog_button_size">16sp</dimen>
 
     <dimen name="logo_size">120dp</dimen>
     <dimen name="half_logo">70dp</dimen>
@@ -18,7 +19,8 @@
     <dimen name="nav_header">180dp</dimen>
     <dimen name="nav_spacing">8dp</dimen>
 
-    <dimen name="dialog_margin">20dp</dimen>
+    <dimen name="dialog_margin">8dp</dimen>
+    <dimen name="desc_padding">2dp</dimen>
     <dimen name="dialog_top_margin">12dp</dimen>
     <dimen name="dialog_desc_height">160dp</dimen>
 
@@ -31,4 +33,9 @@
     <dimen name="logo_margin">72dp</dimen>
     <dimen name="about_text">12sp</dimen>
     <dimen name="bottom_margin">4dp</dimen>
+
+    <dimen name="row_margin">8dp</dimen>
+    <dimen name="linear_margin_right_left">20dp</dimen>
+    <dimen name="linear_margin_top">20dp</dimen>
+    <dimen name="linear_margin_bottom">8dp</dimen>
 </resources>

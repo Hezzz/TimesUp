@@ -1,6 +1,7 @@
 package com.example.timesup_final_project;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
@@ -10,6 +11,8 @@ import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -17,8 +20,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.android.material.navigation.NavigationView;
+
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
@@ -127,6 +130,31 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 if(isValidDestination(R.id.aboutFragment)){
                     Navigation.findNavController(this, R.id.nav_host_fragment).navigate(R.id.aboutFragment);
                 }
+                break;
+            }
+            case R.id.logout:{
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this, R.style.DialogTheme)
+                        .setIcon(R.drawable.logout_icon)
+                        .setTitle(getString(R.string.logout))
+                        .setMessage(getString(R.string.logout_confirmation))
+                        .setNeutralButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                Toast.makeText(getApplicationContext(), "Log-out cancelled.", Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener(){
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                Toast.makeText(getApplicationContext(), getString(R.string.goodbye) + " " + CurrentUser.getFirstname() + "...",
+                                        Toast.LENGTH_SHORT).show();
+                                Intent logout = new Intent(getApplicationContext(), LoginActivity.class);
+                                startActivity(logout);
+                                finish();
+                            }
+                        });
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
             }
         }
         item.setChecked(true);

@@ -9,69 +9,66 @@
 
     <EditText
         android:id="@+id/titleEditText"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:textColor="@color/colorAccent"
-        android:textColorHint="@color/colorAccent"
-        android:backgroundTint="@color/colorAccent"
-        android:textSize="@dimen/dialog_title_size"
-        android:hint="@string/add_title"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         android:layout_marginLeft="@dimen/dialog_margin"
         android:layout_marginRight="@dimen/dialog_margin"
-        android:layout_marginTop="@dimen/dialog_top_margin"/>
+        android:backgroundTint="@color/colorAccent"
+        android:ems="10"
+        android:hint="@string/add_title"
+        android:inputType="textMultiLine|textCapSentences"
+        android:paddingRight="@dimen/dialog_margin"
+        android:textAlignment="center"
+        android:textColor="@color/colorAccent"
+        android:textColorHint="@color/colorAccent"
+        android:textSize="@dimen/dialog_title_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <ScrollView
-        android:id="@+id/desc_scroll"
-        android:layout_width="match_parent"
+    <EditText
+        android:id="@+id/descEditText"
+        android:layout_width="0dp"
         android:layout_height="@dimen/dialog_desc_height"
         android:layout_marginLeft="@dimen/dialog_margin"
         android:layout_marginRight="@dimen/dialog_margin"
+        android:background="@null"
+        android:ems="10"
+        android:gravity="left"
+        android:hint="@string/add_description"
+        android:inputType="textMultiLine|textCapSentences"
+        android:paddingLeft="@dimen/desc_padding"
+        android:textAlignment="gravity"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:textSize="@dimen/dialog_desc_size"
+        android:maxLength="250"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/titleEditText">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <EditText
-                android:id="@+id/descEditText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/colorAccent"
-                android:ems="10"
-                android:hint="@string/add_description"
-                android:inputType="textPersonName"
-                android:textColor="@color/white"
-                android:textColorHint="@color/white"
-                android:textSize="@dimen/dialog_desc_size" />
-        </LinearLayout>
-    </ScrollView>
+        app:layout_constraintTop_toBottomOf="@+id/titleEditText" />
 
     <TextView
         android:id="@+id/cancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/dialog_margin"
+        android:paddingLeft="@dimen/dialog_margin"
+        android:paddingBottom="@dimen/dialog_margin"
         android:text="@string/cancel"
         android:textColor="@color/colorAccent"
-        android:textSize="@dimen/dialog_desc_size"
+        android:textSize="@dimen/dialog_button_size"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/desc_scroll" />
+        app:layout_constraintTop_toBottomOf="@+id/descEditText" />
 
     <TextView
         android:id="@+id/okay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="@dimen/dialog_margin"
+        android:paddingRight="@dimen/dialog_margin"
+        android:paddingBottom="@dimen/dialog_margin"
         android:text="@string/add"
         android:textColor="@color/colorAccent"
-        android:textSize="@dimen/dialog_desc_size"
+        android:textSize="@dimen/dialog_button_size"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/desc_scroll" />
+        app:layout_constraintTop_toBottomOf="@+id/descEditText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
