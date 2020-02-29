@@ -32,8 +32,8 @@
 
     <string name="add_title">Add Title</string>
     <string name="add_description">Add Description</string>
-    <string name="cancel">CANCEL</string>
-    <string name="add"><u>ADD</u></string>
+    <string name="cancel"><u>CANCEL</u></string>
+    <string name="add"><u>OK</u></string>
     <string name="subscribe"><u><i>Subscribe to get the latest features and updates!</i></u></string>
 
     <string name="about_desc">Time\'s Up is a deadline manager application developed for students

@@ -11,15 +11,15 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
 
-public class MyDialogFragment extends AppCompatDialogFragment {
+public class AddNoteDialogFragment extends AppCompatDialogFragment {
 
     EditText addTitle, addDesc;
     TextView cancel, addNew;
 
-    public interface OnInputSelected{
-        void sendInput(String title, String desc);
+    public interface OnNoteAdd {
+        void addNotes(String title, String desc);
     }
-    public OnInputSelected onInputSelected;
+    public OnNoteAdd onNoteAdd;
 
     @Override
     public View onCreateView( LayoutInflater inflater,  ViewGroup container, Bundle savedInstanceState) {
@@ -44,9 +44,7 @@ public class MyDialogFragment extends AppCompatDialogFragment {
                 String desc = addDesc.getText().toString();
                 if(!input.isEmpty() || !desc.isEmpty()){
                     Toast.makeText(getContext(), "Added " + input, Toast.LENGTH_SHORT).show();
-//                    HomeFragment fragment = (HomeFragment) getActivity().getSupportFragmentManager().findFragmentByTag(null);
-//                    fragment.message = input;
-                    onInputSelected.sendInput(input, desc);
+                    onNoteAdd.addNotes(input, desc);
                 }
                 getDialog().dismiss();
             }
@@ -58,9 +56,7 @@ public class MyDialogFragment extends AppCompatDialogFragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         try{
-            onInputSelected = (OnInputSelected)getTargetFragment();
-        }catch(ClassCastException e){
-
-        }
+            onNoteAdd = (OnNoteAdd)getTargetFragment();
+        }catch(ClassCastException e){}
     }
 }
