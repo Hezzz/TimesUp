@@ -2,23 +2,20 @@ package com.example.timesup_final_project;
 
 
 import android.os.Bundle;
-
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class HomeFragment extends Fragment implements AddNoteDialogFragment.OnNoteAdd,
     EditNoteDialogFragment.OnEditNote{
 
-    public static final String TAG = "HOMEFRAGMENT";
     public HomeFragment() {}
     private FloatingActionButton addButton;
-    private TextView clickedTitle, clickedDesc;
+    private TextView clickedTitle, clickedDesc, clickedDate;
     LinearLayout linearLayout;
 
     @Override
@@ -46,16 +43,23 @@ public class HomeFragment extends Fragment implements AddNoteDialogFragment.OnNo
         return view;
     }
 
-    public void addNewReminder(String text, String desct){
+    public void addNewReminder(String text, String desct, String date){
         View deadline = getLayoutInflater().inflate(R.layout.view_custom_row_deadline, linearLayout, false);
-        TextView title = deadline.findViewById(R.id.testTitle);
+
+        TextView title = deadline.findViewById(R.id.deadlineTitle);
+        TextView deadline_date = deadline.findViewById(R.id.deadlineDate);
+        TextView desc = deadline.findViewById(R.id.deadlineDesc);
+
         title.setTag("TITLE");
-        TextView desc = deadline.findViewById(R.id.testDesc);
+        deadline_date.setTag("DATE");
         desc.setTag("DESC");
+
         title.setText(text);
+        deadline_date.setText(date);
         desc.setText(desct);
+
         deadline.setOnClickListener(noteListener);
-        linearLayout.addView(deadline);
+        linearLayout.addView(deadline, 0);
     }
 
 //    @Override
@@ -82,14 +86,15 @@ public class HomeFragment extends Fragment implements AddNoteDialogFragment.OnNo
 //    }
 
     @Override
-    public void addNotes(String title, String desc){
-        addNewReminder(title, desc);
+    public void addNotes(String title, String desc, String date){
+        addNewReminder(title, desc, date);
     }
 
     private View.OnClickListener noteListener = new View.OnClickListener() {
         @Override
         public void onClick(View view){
             clickedTitle = view.findViewWithTag("TITLE");
+            clickedDate = view.findViewWithTag("DATE");
             clickedDesc  = view.findViewWithTag("DESC");
             EditNoteDialogFragment editDialog = new EditNoteDialogFragment();
             editDialog.setTargetFragment(HomeFragment.this, 1);

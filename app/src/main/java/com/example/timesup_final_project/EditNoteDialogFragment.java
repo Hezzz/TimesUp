@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,6 +24,8 @@ public class EditNoteDialogFragment extends AppCompatDialogFragment {
     @Override
     public View onCreateView( LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.dialog_layout, container, false);
+
+        getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
 
         editTitle = view.findViewById(R.id.titleEditText);
         editDesc = view.findViewById(R.id.descEditText);

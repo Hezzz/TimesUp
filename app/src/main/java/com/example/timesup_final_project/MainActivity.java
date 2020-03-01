@@ -83,7 +83,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.help:{
-                Toast.makeText(getApplicationContext(), "Nice", Toast.LENGTH_SHORT).show();
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this, R.style.HelpDialog)
+                        .setIcon(R.drawable.help_icon)
+                        .setTitle(getString(R.string.help))
+                        .setMessage(getString(R.string.help_content));
+                AlertDialog helpDialog = builder.create();
+                helpDialog.show();
                 return true;
             }
         }

@@ -32,9 +32,16 @@
 
     <string name="add_title">Add Title</string>
     <string name="add_description">Add Description</string>
-    <string name="cancel"><u>CANCEL</u></string>
-    <string name="add"><u>OK</u></string>
+    <string name="cancel"><b>CANCEL</b></string>
+    <string name="add"><b>OK</b></string>
+    <string name="date"><u>12/12/12</u></string>
+
     <string name="subscribe"><u><i>Subscribe to get the latest features and updates!</i></u></string>
+
+    <string name="help_content">Hoho.. you have come for help!\n\nThe application is pretty simple, you press the <u>add floating button</u>
+        below at the home screen to add deadlines and reminders, write the title you wish and you can add some description if you want to,
+        set the date that you wish to be reminded then you are okay!\n\nThis app is hoped to be more furnished and updated.
+        \n\n<b>Keep programming!</b></string>
 
     <string name="about_desc">Time\'s Up is a deadline manager application developed for students
         who wish to keep track of the deadlines they must accomplish. A submission as the

@@ -3,8 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="@dimen/dialog_width"
+    android:layout_height="wrap_content"
     android:background="@color/backGround">
 
     <EditText
@@ -30,6 +30,7 @@
         android:id="@+id/descEditText"
         android:layout_width="0dp"
         android:layout_height="@dimen/dialog_desc_height"
+        android:layout_marginBottom="@dimen/dialog_margin"
         android:layout_marginLeft="@dimen/dialog_margin"
         android:layout_marginRight="@dimen/dialog_margin"
         android:background="@null"
@@ -47,6 +48,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/titleEditText" />
 
+    <Button
+        android:id="@+id/datePickerButton"
+        android:layout_width="@dimen/dialog_date_button"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dialog_margin"
+        android:layout_marginRight="@dimen/dialog_margin"
+        android:background="@null"
+        android:text="@string/date"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="@dimen/dialog_title_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/descEditText" />
+
     <TextView
         android:id="@+id/cancel"
         android:layout_width="wrap_content"
@@ -56,8 +72,8 @@
         android:text="@string/cancel"
         android:textColor="@color/colorAccent"
         android:textSize="@dimen/dialog_button_size"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/descEditText" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/okay"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/okay"
@@ -66,9 +82,10 @@
         android:paddingRight="@dimen/dialog_margin"
         android:paddingBottom="@dimen/dialog_margin"
         android:text="@string/add"
+        android:textAlignment="textEnd"
         android:textColor="@color/colorAccent"
         android:textSize="@dimen/dialog_button_size"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/descEditText" />
+        app:layout_constraintTop_toBottomOf="@+id/datePickerButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

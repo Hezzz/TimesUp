@@ -25,4 +25,20 @@
         <item name="windowActionBar">false</item>
     </style>
 
+    <style name="HelpDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:background">@color/backGround</item>
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="DatePicker" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColorPrimaryInverse">@color/backGround</item>
+        <item name="android:textColorSecondaryInverse">@color/backGround</item>
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:textColorSecondary">@color/white</item>
+        <item name="android:windowBackground">@color/backGround</item>
+    </style>
+
 </resources>
