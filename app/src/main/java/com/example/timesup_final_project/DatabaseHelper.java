@@ -5,8 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-
-import androidx.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DatabaseHelper extends SQLiteOpenHelper{
 
@@ -129,4 +129,22 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         database.update(TASK_TABLE, values, whereClause, whereArgs);
     }
 
+    public List<Deadline>getDeadlines(String username){
+        List<Deadline>deadlineList = new ArrayList<>();
+        SQLiteDatabase database = this.getReadableDatabase();
+        String query = "SELECT " + TASK_COL_2 + ", " + TASK_COL_3 + ", " + TASK_COL_4 +
+                " FROM " + TASK_TABLE + " WHERE " + TASK_COL_1 + " = ?";
+        Cursor cursor = database.rawQuery(query, new String[]{username + ""});
+        Deadline deadline;
+        if(cursor.moveToFirst()){
+            do{
+                deadline = new Deadline();
+                deadline.setTastTitle(cursor.getString(cursor.getColumnIndex(TASK_COL_2)));
+                deadline.setTaskDesc(cursor.getString(cursor.getColumnIndex(TASK_COL_3)));
+                deadline.setTaskDate(cursor.getString(cursor.getColumnIndex(TASK_COL_4)));
+                deadlineList.add(deadline);
+            }while(cursor.moveToNext());
+        }
+        return deadlineList;
+    }
 }

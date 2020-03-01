@@ -15,6 +15,8 @@ import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.List;
+
 public class HomeFragment extends Fragment implements AddNoteDialogFragment.OnNoteAdd,
     EditNoteDialogFragment.OnEditNote{
 
@@ -23,6 +25,7 @@ public class HomeFragment extends Fragment implements AddNoteDialogFragment.OnNo
     private TextView clickedTitle, clickedDesc, clickedDate;
     private LinearLayout linearLayout;
     private DatabaseHelper deadlineDatabaseHelper;
+    private List<Deadline> deadlineList;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -33,6 +36,29 @@ public class HomeFragment extends Fragment implements AddNoteDialogFragment.OnNo
         deadlineDatabaseHelper = new DatabaseHelper(getActivity());
 
         linearLayout = view.findViewById(R.id.deadlineList);
+
+        deadlineList = deadlineDatabaseHelper.getDeadlines(CurrentUser.getUserName());
+
+        for(int i=0; i<deadlineList.size(); i++){
+            View deadline = getLayoutInflater().inflate(R.layout.view_custom_row_deadline, linearLayout, false);
+
+            TextView title = deadline.findViewById(R.id.deadlineTitle);
+            TextView deadline_date = deadline.findViewById(R.id.deadlineDate);
+            TextView desc = deadline.findViewById(R.id.deadlineDesc);
+
+            title.setTag("TITLE");
+            deadline_date.setTag("DATE");
+            desc.setTag("DESC");
+
+            title.setText(deadlineList.get(i).getTastTitle());
+            desc.setText(deadlineList.get(i).getTaskDesc());
+            deadline_date.setText(deadlineList.get(i).getTaskDate());
+
+            deadline.setOnClickListener(noteListener);
+            deadline.setOnLongClickListener(noteDeleteListener);
+            linearLayout.addView(deadline, 0);
+        }
+
         addButton = view.findViewById(R.id.addFloatingButton);
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,7 +72,7 @@ public class HomeFragment extends Fragment implements AddNoteDialogFragment.OnNo
         return view;
     }
 
-    public void addNewReminder(String text, String desct, String date){
+    public void addNewReminder(String text, String description, String date){
         View deadline = getLayoutInflater().inflate(R.layout.view_custom_row_deadline, linearLayout, false);
 
         TextView title = deadline.findViewById(R.id.deadlineTitle);
@@ -59,7 +85,7 @@ public class HomeFragment extends Fragment implements AddNoteDialogFragment.OnNo
 
         title.setText(text);
         deadline_date.setText(date);
-        desc.setText(desct);
+        desc.setText(description);
 
         deadline.setOnClickListener(noteListener);
         deadline.setOnLongClickListener(noteDeleteListener);
@@ -143,30 +169,3 @@ public class HomeFragment extends Fragment implements AddNoteDialogFragment.OnNo
         clickedDate.setText(newDate);
     }
 }
-
-//    @Override
-//    public void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//    }
-//    @Override
-//    public void onSaveInstanceState(Bundle state){
-//        super.onSaveInstanceState(state);
-//        if(state!=null){
-//            state.putString("website","You got back");
-//            Toast.makeText(getActivity(), "Fragment Save State", Toast.LENGTH_LONG).show();
-//        }
-//    }
-//
-//    @Override
-//    public void onViewStateRestored(Bundle savedInstanceState){
-//        super.onViewStateRestored(savedInstanceState);
-//        if(savedInstanceState!=null){
-//            String website = savedInstanceState.getString("website");
-//            Toast.makeText(getActivity(),"Fragment Restore State: ",Toast.LENGTH_LONG).show();
-//        }
-//    }
-//
-//    @Override
-//    public void onActivityCreated(Bundle savedInstanceState){
-//        super.onActivityCreated(savedInstanceState);
-//    }
