@@ -33,6 +33,6 @@
         android:text="Another sample"
         android:textSize="@dimen/row_desc_size"
         android:textColor="@color/white"
-        android:maxLength="10"/>
+        android:maxLength="25"/>
 
 </LinearLayout>

@@ -52,11 +52,13 @@ public class AddNoteDialogFragment extends AppCompatDialogFragment implements Da
             public void onClick(View view) {
                 String input = addTitle.getText().toString();
                 String desc = addDesc.getText().toString();
-                if(!input.isEmpty() || !desc.isEmpty()){
+                if(!input.isEmpty()){
                     Toast.makeText(getContext(), "Added " + input, Toast.LENGTH_SHORT).show();
+                    if(desc.isEmpty()) desc = "Add description...";
                     onNoteAdd.addNotes(input, desc, dateButton.getText().toString());
+                    getDialog().dismiss();
                 }
-                getDialog().dismiss();
+                if(input.isEmpty()) Toast.makeText(getContext(), "Add title", Toast.LENGTH_SHORT).show();
             }
         });
 

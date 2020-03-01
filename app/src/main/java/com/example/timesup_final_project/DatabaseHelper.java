@@ -94,4 +94,27 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         CurrentUser.setUser(cursor.getString(cursor.getColumnIndex(COL_3)), cursor.getString(cursor.getColumnIndex(COL_4)),
                 cursor.getString(cursor.getColumnIndex(COL_5)), cursor.getString(cursor.getColumnIndex(COL_6)));
     }
+
+    public boolean addNewDeadline(String username, String task_title,
+                               String task_desc, String task_date){
+        SQLiteDatabase database = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(TASK_COL_1, username);
+        values.put(TASK_COL_2, task_title);
+        values.put(TASK_COL_3, task_desc);
+        values.put(TASK_COL_4, task_date);
+
+        long result = database.insert(TASK_TABLE,null, values);
+        if (result == -1) return false;
+        else return true;
+    }
+
+    public void deleteDeadline(String username, String task_title,
+                               String task_desc, String task_date){
+        SQLiteDatabase database = this.getWritableDatabase();
+        database.delete(TASK_TABLE, TASK_COL_1 + " = ? AND " +
+                TASK_COL_2 + " = ? AND " + TASK_COL_3 + " = ? AND " + TASK_COL_4 + " = ?",
+                new String[]{username, task_title, task_desc, task_date});
+    }
+
 }

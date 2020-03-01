@@ -33,7 +33,7 @@
     <string name="add_title">Add Title</string>
     <string name="add_description">Add Description</string>
     <string name="cancel"><b>CANCEL</b></string>
-    <string name="add"><b>OK</b></string>
+    <string name="add"><b>Okay</b></string>
     <string name="date"><u>12/12/12</u></string>
 
     <string name="subscribe"><u><i>Subscribe to get the latest features and updates!</i></u></string>
@@ -53,4 +53,9 @@
     <string name="logout">Log-out</string>
     <string name="yes">Yes</string>
     <string name="goodbye">Good bye</string>
+    <string name="delete_title">Delete Note?</string>
+    <string name="delete_message">Are you sure you want to delete this deadline reminder?</string>
+    <string name="delete_cancelled">Delete cancelled.</string>
+    <string name="delete">Delete</string>
+    <string name="deadline_deleted">Deadline deleted.</string>
 </resources>
