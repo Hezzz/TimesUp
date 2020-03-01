@@ -45,6 +45,6 @@
     <dimen name="row_date_size">28sp</dimen>
     <dimen name="row_desc_size">20sp</dimen>
     <dimen name="row_bottom_padding">2dp</dimen>
-    <dimen name="row_bottom_margin">12dp</dimen>
+    <dimen name="row_bottom_margin">16dp</dimen>
 
 </resources>

@@ -31,12 +31,17 @@ public class EditNoteDialogFragment extends AppCompatDialogFragment implements D
         View view = inflater.inflate(R.layout.dialog_layout, container, false);
 
         getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
+        Bundle oldData = getArguments();
 
         editTitle = view.findViewById(R.id.titleEditText);
         editDesc = view.findViewById(R.id.descEditText);
         cancel = view.findViewById(R.id.cancel);
         editNote = view.findViewById(R.id.okay);
         dateButton = view.findViewById(R.id.datePickerButton);
+
+        editTitle.setText(oldData.getString("TITLE"));
+        editDesc.setText(oldData.getString("DESC"));
+        dateButton.setText(oldData.getString("DATE"));
 
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -34,9 +34,7 @@ public class HomeFragment extends Fragment implements AddNoteDialogFragment.OnNo
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
         deadlineDatabaseHelper = new DatabaseHelper(getActivity());
-
         linearLayout = view.findViewById(R.id.deadlineList);
-
         deadlineList = deadlineDatabaseHelper.getDeadlines(CurrentUser.getUserName());
 
         for(int i=0; i<deadlineList.size(); i++){
@@ -119,7 +117,12 @@ public class HomeFragment extends Fragment implements AddNoteDialogFragment.OnNo
                             clickedTitle = view.findViewWithTag("TITLE");
                             clickedDate = view.findViewWithTag("DATE");
                             clickedDesc  = view.findViewWithTag("DESC");
+                            Bundle oldData = new Bundle();
+                            oldData.putString("TITLE", clickedTitle.getText().toString());
+                            oldData.putString("DESC", clickedDesc.getText().toString());
+                            oldData.putString("DATE", clickedDate.getText().toString());
                             EditNoteDialogFragment editDialog = new EditNoteDialogFragment();
+                            editDialog.setArguments(oldData);
                             editDialog.setTargetFragment(HomeFragment.this, 1);
                             editDialog.show(getParentFragmentManager(), null);
                         }

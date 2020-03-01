@@ -24,9 +24,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginStart="@dimen/linear_margin_right_left"
         android:layout_marginTop="@dimen/linear_margin_top"
-        android:layout_marginEnd="@dimen/linear_margin_right_left"
         android:layout_marginBottom="@dimen/linear_margin_bottom">
 
         <LinearLayout
