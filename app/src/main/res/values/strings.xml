@@ -58,4 +58,6 @@
     <string name="delete_cancelled">Delete cancelled.</string>
     <string name="delete">Delete</string>
     <string name="deadline_deleted">Deadline deleted.</string>
+    <string name="edit_deadline">Edit Deadline?</string>
+    <string name="edit_question">Do you want to edit this?</string>
 </resources>

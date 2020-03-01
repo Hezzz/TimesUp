@@ -77,13 +77,29 @@ public class HomeFragment extends Fragment implements AddNoteDialogFragment.OnNo
 
     private View.OnClickListener noteListener = new View.OnClickListener(){
         @Override
-        public void onClick(View view){
-            clickedTitle = view.findViewWithTag("TITLE");
-            clickedDate = view.findViewWithTag("DATE");
-            clickedDesc  = view.findViewWithTag("DESC");
-            EditNoteDialogFragment editDialog = new EditNoteDialogFragment();
-            editDialog.setTargetFragment(HomeFragment.this, 1);
-            editDialog.show(getParentFragmentManager(), null);
+        public void onClick(final View view){
+            AlertDialog.Builder builder = new AlertDialog.Builder(getContext(), R.style.DialogTheme)
+                    .setIcon(R.drawable.edit_icon)
+                    .setTitle(getString(R.string.edit_deadline))
+                    .setMessage(getString(R.string.edit_question))
+                    .setNeutralButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i){
+                        }
+                    })
+                    .setPositiveButton(R.string.add, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            clickedTitle = view.findViewWithTag("TITLE");
+                            clickedDate = view.findViewWithTag("DATE");
+                            clickedDesc  = view.findViewWithTag("DESC");
+                            EditNoteDialogFragment editDialog = new EditNoteDialogFragment();
+                            editDialog.setTargetFragment(HomeFragment.this, 1);
+                            editDialog.show(getParentFragmentManager(), null);
+                        }
+                    });
+            AlertDialog editDialog = builder.create();
+            editDialog.show();
         }
     };
 
@@ -118,7 +134,10 @@ public class HomeFragment extends Fragment implements AddNoteDialogFragment.OnNo
     };
 
     @Override
-    public void editNote(String newTitle, String newDesc, String newDate) {
+    public void editNote(String newTitle, String newDesc, String newDate){
+        deadlineDatabaseHelper.editDeadline(CurrentUser.getUserName(), clickedTitle.getText().toString(),
+                clickedDesc.getText().toString(), clickedDate.getText().toString(), newTitle,
+                newDesc, newDate);
         clickedTitle.setText(newTitle);
         clickedDesc.setText(newDesc);
         clickedDate.setText(newDate);

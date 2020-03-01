@@ -117,4 +117,16 @@ public class DatabaseHelper extends SQLiteOpenHelper{
                 new String[]{username, task_title, task_desc, task_date});
     }
 
+    public void editDeadline(String username, String oldTitle, String oldDesc, String oldDate,
+                             String newTitle, String newDesc, String newDate){
+        SQLiteDatabase database = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(TASK_COL_2, newTitle);
+        values.put(TASK_COL_3, newDesc);
+        values.put(TASK_COL_4, newDate);
+        String whereClause = TASK_COL_1 + " = ? AND " + TASK_COL_2 + " = ? AND " + TASK_COL_3 + " = ? AND " + TASK_COL_4 + " = ?";
+        String whereArgs [] = new String[]{username, oldTitle, oldDesc, oldDate};
+        database.update(TASK_TABLE, values, whereClause, whereArgs);
+    }
+
 }
