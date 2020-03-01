@@ -22,7 +22,7 @@ public class HomeFragment extends Fragment implements AddNoteDialogFragment.OnNo
 
     public HomeFragment() {}
     private FloatingActionButton addButton;
-    private TextView clickedTitle, clickedDesc, clickedDate;
+    private TextView clickedTitle, clickedDesc, clickedDate, clickedTime;
     private LinearLayout linearLayout;
     private DatabaseHelper deadlineDatabaseHelper;
     private List<Deadline> deadlineList;
@@ -43,14 +43,17 @@ public class HomeFragment extends Fragment implements AddNoteDialogFragment.OnNo
             TextView title = deadline.findViewById(R.id.deadlineTitle);
             TextView deadline_date = deadline.findViewById(R.id.deadlineDate);
             TextView desc = deadline.findViewById(R.id.deadlineDesc);
+            TextView time = deadline.findViewById(R.id.deadlineTime);
 
             title.setTag("TITLE");
             deadline_date.setTag("DATE");
             desc.setTag("DESC");
+            time.setTag("TIME");
 
             title.setText(deadlineList.get(i).getTastTitle());
             desc.setText(deadlineList.get(i).getTaskDesc());
             deadline_date.setText(deadlineList.get(i).getTaskDate());
+            time.setText(deadlineList.get(i).getTask_time());
 
             deadline.setOnClickListener(noteListener);
             deadline.setOnLongClickListener(noteDeleteListener);
@@ -70,20 +73,23 @@ public class HomeFragment extends Fragment implements AddNoteDialogFragment.OnNo
         return view;
     }
 
-    public void addNewReminder(String text, String description, String date){
+    public void addNewReminder(String text, String description, String date, String time){
         View deadline = getLayoutInflater().inflate(R.layout.view_custom_row_deadline, linearLayout, false);
 
         TextView title = deadline.findViewById(R.id.deadlineTitle);
         TextView deadline_date = deadline.findViewById(R.id.deadlineDate);
         TextView desc = deadline.findViewById(R.id.deadlineDesc);
+        TextView deadline_time = deadline.findViewById(R.id.deadlineTime);
 
         title.setTag("TITLE");
         deadline_date.setTag("DATE");
         desc.setTag("DESC");
+        deadline_time.setTag("TIME");
 
         title.setText(text);
         deadline_date.setText(date);
         desc.setText(description);
+        deadline_time.setText(time);
 
         deadline.setOnClickListener(noteListener);
         deadline.setOnLongClickListener(noteDeleteListener);
@@ -91,11 +97,11 @@ public class HomeFragment extends Fragment implements AddNoteDialogFragment.OnNo
     }
 
     @Override
-    public void addNotes(String title, String desc, String date){
+    public void addNotes(String title, String desc, String date, String time){
         if (deadlineDatabaseHelper.addNewDeadline(CurrentUser.getUserName(),
-                title, desc, date)){
+                title, desc, date, time)){
             Toast.makeText(getActivity(), "Added " + title, Toast.LENGTH_SHORT).show();
-            addNewReminder(title, desc, date);
+            addNewReminder(title, desc, date, time);
         }
     }
 
@@ -117,10 +123,12 @@ public class HomeFragment extends Fragment implements AddNoteDialogFragment.OnNo
                             clickedTitle = view.findViewWithTag("TITLE");
                             clickedDate = view.findViewWithTag("DATE");
                             clickedDesc  = view.findViewWithTag("DESC");
+                            clickedTime = view.findViewWithTag("TIME");
                             Bundle oldData = new Bundle();
                             oldData.putString("TITLE", clickedTitle.getText().toString());
                             oldData.putString("DESC", clickedDesc.getText().toString());
                             oldData.putString("DATE", clickedDate.getText().toString());
+                            oldData.putString("TIME", clickedTime.getText().toString());
                             EditNoteDialogFragment editDialog = new EditNoteDialogFragment();
                             editDialog.setArguments(oldData);
                             editDialog.setTargetFragment(HomeFragment.this, 1);
@@ -151,7 +159,8 @@ public class HomeFragment extends Fragment implements AddNoteDialogFragment.OnNo
                             deadlineDatabaseHelper.deleteDeadline(CurrentUser.getUserName(),
                                     ((TextView)view.findViewWithTag("TITLE")).getText().toString(),
                                     ((TextView)view.findViewWithTag("DESC")).getText().toString(),
-                                    ((TextView)view.findViewWithTag("DATE")).getText().toString());
+                                    ((TextView)view.findViewWithTag("DATE")).getText().toString(),
+                                    ((TextView)view.findViewWithTag("TIME")).getText().toString());
                             ((ViewGroup)view.getParent()).removeView(view);
                             Toast.makeText(getContext(),getString(R.string.deadline_deleted), Toast.LENGTH_SHORT).show();
                         }
@@ -163,12 +172,13 @@ public class HomeFragment extends Fragment implements AddNoteDialogFragment.OnNo
     };
 
     @Override
-    public void editNote(String newTitle, String newDesc, String newDate){
+    public void editNote(String newTitle, String newDesc, String newDate, String newTime){
         deadlineDatabaseHelper.editDeadline(CurrentUser.getUserName(), clickedTitle.getText().toString(),
-                clickedDesc.getText().toString(), clickedDate.getText().toString(), newTitle,
-                newDesc, newDate);
+                clickedDesc.getText().toString(), clickedDate.getText().toString(), clickedTime.getText().toString(),
+                newTitle, newDesc, newDate, newTime);
         clickedTitle.setText(newTitle);
         clickedDesc.setText(newDesc);
         clickedDate.setText(newDate);
+        clickedTime.setText(newTime);
     }
 }

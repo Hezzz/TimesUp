@@ -33,8 +33,9 @@
     <string name="add_title">Add Title</string>
     <string name="add_description">Add Description</string>
     <string name="cancel"><b>CANCEL</b></string>
-    <string name="add"><b>Okay</b></string>
+    <string name="add"><b>OKAY</b></string>
     <string name="date"><u>12/12/12</u></string>
+    <string name="time">12:00</string>
 
     <string name="subscribe"><u><i>Subscribe to get the latest features and updates!</i></u></string>
 

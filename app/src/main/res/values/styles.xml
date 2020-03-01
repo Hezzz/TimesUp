@@ -41,4 +41,13 @@
         <item name="android:windowBackground">@color/backGround</item>
     </style>
 
+    <style name="TimePicker" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorControlActivated">@color/colorAccent</item>
+        <item name="android:textColorPrimaryInverse">@color/accent_dark</item>
+        <item name="android:textColorSecondaryInverse">@color/backGround</item>
+        <item name="android:textColorPrimary">@color/backGround</item>
+        <item name="android:windowBackground">@color/backGround</item>
+    </style>
+
 </resources>

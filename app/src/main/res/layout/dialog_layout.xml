@@ -30,7 +30,6 @@
         android:id="@+id/descEditText"
         android:layout_width="0dp"
         android:layout_height="@dimen/dialog_desc_height"
-        android:layout_marginBottom="@dimen/dialog_margin"
         android:layout_marginLeft="@dimen/dialog_margin"
         android:layout_marginRight="@dimen/dialog_margin"
         android:background="@null"
@@ -38,12 +37,12 @@
         android:gravity="left"
         android:hint="@string/add_description"
         android:inputType="textMultiLine|textCapSentences"
+        android:maxLength="250"
         android:paddingLeft="@dimen/desc_padding"
         android:textAlignment="gravity"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
         android:textSize="@dimen/dialog_desc_size"
-        android:maxLength="250"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/titleEditText" />
@@ -51,7 +50,7 @@
     <Button
         android:id="@+id/datePickerButton"
         android:layout_width="@dimen/dialog_date_button"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/picker_height"
         android:layout_marginLeft="@dimen/dialog_margin"
         android:layout_marginRight="@dimen/dialog_margin"
         android:background="@null"
@@ -61,7 +60,7 @@
         android:textSize="@dimen/dialog_title_size"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/descEditText" />
+        app:layout_constraintTop_toBottomOf="@+id/timeButton" />
 
     <TextView
         android:id="@+id/cancel"
@@ -87,5 +86,20 @@
         android:textSize="@dimen/dialog_button_size"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/datePickerButton" />
+
+    <Button
+        android:id="@+id/timeButton"
+        android:layout_width="@dimen/dialog_date_button"
+        android:layout_height="@dimen/picker_height"
+        android:layout_marginLeft="@dimen/dialog_margin"
+        android:layout_marginRight="@dimen/dialog_margin"
+        android:background="@null"
+        android:text="@string/time"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="@dimen/dialog_title_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/descEditText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

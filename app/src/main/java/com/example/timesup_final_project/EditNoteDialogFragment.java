@@ -1,8 +1,10 @@
 package com.example.timesup_final_project;
 
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,18 +13,21 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatDialogFragment;
+
 import java.util.Calendar;
 
-public class EditNoteDialogFragment extends AppCompatDialogFragment implements DatePickerDialog.OnDateSetListener {
+public class EditNoteDialogFragment extends AppCompatDialogFragment implements DatePickerDialog.OnDateSetListener,
+        TimePickerDialog.OnTimeSetListener{
 
     private EditText editTitle, editDesc;
     private TextView cancel, editNote;
-    private Button dateButton;
+    private Button dateButton, timeButton;
 
     public interface OnEditNote{
-        void editNote(String newTitle, String newDesc, String newDate);
+        void editNote(String newTitle, String newDesc, String newDate, String time);
     }
     public OnEditNote onEditNote;
 
@@ -38,10 +43,12 @@ public class EditNoteDialogFragment extends AppCompatDialogFragment implements D
         cancel = view.findViewById(R.id.cancel);
         editNote = view.findViewById(R.id.okay);
         dateButton = view.findViewById(R.id.datePickerButton);
+        timeButton = view.findViewById(R.id.timeButton);
 
         editTitle.setText(oldData.getString("TITLE"));
         editDesc.setText(oldData.getString("DESC"));
         dateButton.setText(oldData.getString("DATE"));
+        timeButton.setText(oldData.getString("TIME"));
 
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,7 +64,7 @@ public class EditNoteDialogFragment extends AppCompatDialogFragment implements D
                 String desc = editDesc.getText().toString();
                 if(!title.isEmpty() || !desc.isEmpty()){
                     Toast.makeText(getContext(), "Edited " + title, Toast.LENGTH_SHORT).show();
-                    onEditNote.editNote(title, desc, dateButton.getText().toString());
+                    onEditNote.editNote(title, desc, dateButton.getText().toString(), timeButton.getText().toString());
                 }
                 getDialog().dismiss();
             }
@@ -70,7 +77,34 @@ public class EditNoteDialogFragment extends AppCompatDialogFragment implements D
             }
         });
 
+        timeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showTimePickerDialog();
+            }
+        });
+
         return view;
+    }
+
+    private void showTimePickerDialog(){
+        TimePickerDialog timePickerDialog = new TimePickerDialog(
+                getActivity(),
+                R.style.TimePicker,
+                this,
+                Calendar.getInstance().get(Calendar.HOUR_OF_DAY),
+                Calendar.getInstance().get(Calendar.MINUTE),
+                DateFormat.is24HourFormat(getActivity())
+        );
+        timePickerDialog.show();
+    }
+
+    @Override
+    public void onTimeSet(TimePicker timePicker, int hour, int minutes) {
+        String time;
+        if(minutes < 10 ) time = hour + ":0" + minutes;
+        else time = hour + ":" + minutes;
+        timeButton.setText(time);
     }
 
     private void showDatePickerDialog(){

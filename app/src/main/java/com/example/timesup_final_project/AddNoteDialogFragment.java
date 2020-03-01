@@ -1,8 +1,10 @@
 package com.example.timesup_final_project;
 
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,20 +13,22 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
 import java.util.Calendar;
 
 
-public class AddNoteDialogFragment extends AppCompatDialogFragment implements DatePickerDialog.OnDateSetListener {
+public class AddNoteDialogFragment extends AppCompatDialogFragment implements DatePickerDialog.OnDateSetListener,
+        TimePickerDialog.OnTimeSetListener {
 
     private EditText addTitle, addDesc;
     private TextView cancel, addNew;
-    private Button dateButton;
+    private Button dateButton, timeButton;
 
     public interface OnNoteAdd{
-        void addNotes(String title, String desc, String date);
+        void addNotes(String title, String desc, String date, String time);
     }
     public OnNoteAdd onNoteAdd;
 
@@ -39,6 +43,7 @@ public class AddNoteDialogFragment extends AppCompatDialogFragment implements Da
         cancel = view.findViewById(R.id.cancel);
         addNew = view.findViewById(R.id.okay);
         dateButton = view.findViewById(R.id.datePickerButton);
+        timeButton = view.findViewById(R.id.timeButton);
 
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,7 +60,7 @@ public class AddNoteDialogFragment extends AppCompatDialogFragment implements Da
                 if(!input.isEmpty()){
                     Toast.makeText(getContext(), "Added " + input, Toast.LENGTH_SHORT).show();
                     if(desc.isEmpty()) desc = "Add description...";
-                    onNoteAdd.addNotes(input, desc, dateButton.getText().toString());
+                    onNoteAdd.addNotes(input, desc, dateButton.getText().toString(), timeButton.getText().toString());
                     getDialog().dismiss();
                 }
                 if(input.isEmpty()) Toast.makeText(getContext(), "Add title", Toast.LENGTH_SHORT).show();
@@ -66,6 +71,13 @@ public class AddNoteDialogFragment extends AppCompatDialogFragment implements Da
             @Override
             public void onClick(View view) {
                 showDatePickerDialog();
+            }
+        });
+
+        timeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showTimePickerDialog();
             }
         });
         return view;
@@ -81,6 +93,26 @@ public class AddNoteDialogFragment extends AppCompatDialogFragment implements Da
                 Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
                 );
         datePickerDialog.show();
+    }
+
+    private void showTimePickerDialog(){
+        TimePickerDialog timePickerDialog = new TimePickerDialog(
+                getActivity(),
+                R.style.TimePicker,
+                this,
+                Calendar.getInstance().get(Calendar.HOUR_OF_DAY),
+                Calendar.getInstance().get(Calendar.MINUTE),
+                DateFormat.is24HourFormat(getActivity())
+        );
+        timePickerDialog.show();
+    }
+
+    @Override
+    public void onTimeSet(TimePicker timePicker, int hour, int minutes){
+        String time;
+        if(minutes < 10 ) time = hour + ":0" + minutes;
+        else time = hour + ":" + minutes;
+        timeButton.setText(time);
     }
 
     @Override

@@ -16,10 +16,20 @@
         android:paddingTop="@dimen/desc_padding"
         android:layout_marginStart="@dimen/linear_margin_right_left"
         android:layout_marginEnd="@dimen/linear_margin_right_left"
-        android:text="Sample"
         android:inputType="textMultiLine"
         android:textColor="@color/colorAccent"
         android:textSize="@dimen/row_title_size"
+        android:enabled="false"/>
+
+    <TextView
+        android:id="@+id/deadlineTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/linear_margin_right_left"
+        android:layout_marginEnd="@dimen/linear_margin_right_left"
+        android:paddingBottom="@dimen/desc_padding"
+        android:textSize="@dimen/row_desc_size"
+        android:textColor="@color/white"
         android:enabled="false"/>
 
     <TextView
@@ -40,7 +50,6 @@
         android:layout_marginEnd="@dimen/linear_margin_right_left"
         android:paddingBottom="@dimen/desc_padding"
         android:inputType="textMultiLine"
-        android:text="Another sample"
         android:textSize="@dimen/row_desc_size"
         android:textColor="@color/white"
         android:maxLength="25"

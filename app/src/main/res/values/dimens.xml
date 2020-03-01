@@ -23,8 +23,9 @@
     <dimen name="desc_padding">2dp</dimen>
     <dimen name="dialog_top_margin">12dp</dimen>
     <dimen name="dialog_width">420dp</dimen>
-    <dimen name="dialog_desc_height">160dp</dimen>
+    <dimen name="dialog_desc_height">200dp</dimen>
     <dimen name="dialog_date_button">120dp</dimen>
+    <dimen name="picker_height">32dp</dimen>
 
     <dimen name="account_name">32dp</dimen>
     <dimen name="account_head_top">36dp</dimen>

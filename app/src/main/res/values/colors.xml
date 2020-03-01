@@ -4,6 +4,7 @@
     <color name="colorAccent">#ffe67c</color>
     <color name="backGround">#1D1B1B</color>
     <color name="white">#FFFFFF</color>
+    <color name="accent_dark">#ab994a</color>
     <color name="textSecondary">#292e37</color>
 
 </resources>

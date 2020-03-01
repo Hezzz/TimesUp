@@ -33,12 +33,14 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     private static final String TASK_COL_2 = "task_title";
     private static final String TASK_COL_3 = "task_desc";
     private static final String TASK_COL_4 = "task_date";
+    private static final String TASK_COL_5 = "task_time";
 
     private static final String CREATE_TASK = "CREATE TABLE " + TASK_TABLE + "( " +
             TASK_COL_1 + " TEXT NOT NULL, " +
             TASK_COL_2 + " TEXT NOT NULL, " +
             TASK_COL_3 + " TEXT NOT NULL, " +
-            TASK_COL_4 + ")";
+            TASK_COL_4 + " TEXT NOT NULL, " +
+            TASK_COL_5 + ")";
 
     public DatabaseHelper(Context context){
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -96,13 +98,14 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     }
 
     public boolean addNewDeadline(String username, String task_title,
-                               String task_desc, String task_date){
+                               String task_desc, String task_date, String task_time){
         SQLiteDatabase database = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(TASK_COL_1, username);
         values.put(TASK_COL_2, task_title);
         values.put(TASK_COL_3, task_desc);
         values.put(TASK_COL_4, task_date);
+        values.put(TASK_COL_5, task_time);
 
         long result = database.insert(TASK_TABLE,null, values);
         if (result == -1) return false;
@@ -110,29 +113,32 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     }
 
     public void deleteDeadline(String username, String task_title,
-                               String task_desc, String task_date){
+                               String task_desc, String task_date, String task_time){
         SQLiteDatabase database = this.getWritableDatabase();
         database.delete(TASK_TABLE, TASK_COL_1 + " = ? AND " +
-                TASK_COL_2 + " = ? AND " + TASK_COL_3 + " = ? AND " + TASK_COL_4 + " = ?",
-                new String[]{username, task_title, task_desc, task_date});
+                TASK_COL_2 + " = ? AND " + TASK_COL_3 + " = ? AND " + TASK_COL_4 + " = ? AND "
+                + TASK_COL_5 + " = ?",
+                new String[]{username, task_title, task_desc, task_date, task_time});
     }
 
-    public void editDeadline(String username, String oldTitle, String oldDesc, String oldDate,
-                             String newTitle, String newDesc, String newDate){
+    public void editDeadline(String username, String oldTitle, String oldDesc, String oldDate, String oldTime,
+                             String newTitle, String newDesc, String newDate, String newTime){
         SQLiteDatabase database = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(TASK_COL_2, newTitle);
         values.put(TASK_COL_3, newDesc);
         values.put(TASK_COL_4, newDate);
-        String whereClause = TASK_COL_1 + " = ? AND " + TASK_COL_2 + " = ? AND " + TASK_COL_3 + " = ? AND " + TASK_COL_4 + " = ?";
-        String whereArgs [] = new String[]{username, oldTitle, oldDesc, oldDate};
+        values.put(TASK_COL_5, newTime);
+        String whereClause = TASK_COL_1 + " = ? AND " + TASK_COL_2 + " = ? AND " + TASK_COL_3 + " = ? AND " + TASK_COL_4 + " = ? AND "
+                + TASK_COL_5 + " = ?";
+        String whereArgs [] = new String[]{username, oldTitle, oldDesc, oldDate, oldTime};
         database.update(TASK_TABLE, values, whereClause, whereArgs);
     }
 
     public List<Deadline>getDeadlines(String username){
         List<Deadline>deadlineList = new ArrayList<>();
         SQLiteDatabase database = this.getReadableDatabase();
-        String query = "SELECT " + TASK_COL_2 + ", " + TASK_COL_3 + ", " + TASK_COL_4 +
+        String query = "SELECT " + TASK_COL_2 + ", " + TASK_COL_3 + ", " + TASK_COL_4 + ", " + TASK_COL_5 +
                 " FROM " + TASK_TABLE + " WHERE " + TASK_COL_1 + " = ?";
         Cursor cursor = database.rawQuery(query, new String[]{username + ""});
         Deadline deadline;
@@ -142,6 +148,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
                 deadline.setTastTitle(cursor.getString(cursor.getColumnIndex(TASK_COL_2)));
                 deadline.setTaskDesc(cursor.getString(cursor.getColumnIndex(TASK_COL_3)));
                 deadline.setTaskDate(cursor.getString(cursor.getColumnIndex(TASK_COL_4)));
+                deadline.setTask_time(cursor.getString(cursor.getColumnIndex(TASK_COL_5)));
                 deadlineList.add(deadline);
             }while(cursor.moveToNext());
         }

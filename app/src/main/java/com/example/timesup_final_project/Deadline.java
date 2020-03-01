@@ -1,8 +1,13 @@
 package com.example.timesup_final_project;
 
 public class Deadline {
-    private String tastTitle, taskDesc, taskDate;
+    private String tastTitle;
+    private String taskDesc;
+    private String taskDate;
+    private String task_time;
 
+    public String getTask_time(){return task_time;}
+    public void setTask_time(String task_time){this.task_time = task_time;}
     public String getTastTitle(){return tastTitle;}
     public void setTastTitle(String tastTitle){this.tastTitle = tastTitle;}
     public String getTaskDesc(){return taskDesc;}
