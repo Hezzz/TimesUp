@@ -52,7 +52,6 @@
         android:inputType="textMultiLine"
         android:textSize="@dimen/row_desc_size"
         android:textColor="@color/white"
-        android:maxLength="25"
         android:enabled="false"/>
 
 </LinearLayout>
