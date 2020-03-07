@@ -1,8 +1,10 @@
 package com.example.timesup_final_project;
-
+import android.app.AlarmManager;
 import android.app.DatePickerDialog;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
@@ -26,6 +28,8 @@ public class AddNoteDialogFragment extends AppCompatDialogFragment implements Da
     private EditText addTitle, addDesc;
     private TextView cancel, addNew;
     private Button dateButton, timeButton;
+    public static int alarmMonth, alarmDay, alarmYear, alarmHour, alarmMinute;
+    private int req_code = 0;
 
     public interface OnNoteAdd{
         void addNotes(String title, String desc, String date, String time);
@@ -60,7 +64,9 @@ public class AddNoteDialogFragment extends AppCompatDialogFragment implements Da
                 if(!input.isEmpty()){
                     Toast.makeText(getContext(), "Added " + input, Toast.LENGTH_SHORT).show();
                     if(desc.isEmpty()) desc = "Add description...";
+                    req_code = input.length() + desc.length();
                     onNoteAdd.addNotes(input, desc, dateButton.getText().toString(), timeButton.getText().toString());
+                    setAlarm(input, desc);
                     getDialog().dismiss();
                 }
                 if(input.isEmpty()) Toast.makeText(getContext(), "Add title", Toast.LENGTH_SHORT).show();
@@ -109,6 +115,8 @@ public class AddNoteDialogFragment extends AppCompatDialogFragment implements Da
 
     @Override
     public void onTimeSet(TimePicker timePicker, int hour, int minutes){
+        alarmHour = hour;
+        alarmMinute = minutes;
         String time;
         if(minutes < 10 ) time = hour + ":0" + minutes;
         else time = hour + ":" + minutes;
@@ -117,8 +125,31 @@ public class AddNoteDialogFragment extends AppCompatDialogFragment implements Da
 
     @Override
     public void onDateSet(DatePicker datePicker, int year, int month, int day){
+        alarmYear = year;
+        alarmMonth = month;
+        alarmDay = day;
         String date = month + 1 + "/" + day + "/" + year;
         dateButton.setText(date);
+    }
+
+    private void setAlarm(String title, String desc){
+        Calendar current = Calendar.getInstance();
+        Calendar setCal = (Calendar)current.clone();
+        setCal.set(Calendar.HOUR_OF_DAY, alarmHour);
+        setCal.set(Calendar.MINUTE, alarmMinute);
+        setCal.set(Calendar.DAY_OF_MONTH, alarmDay);
+        setCal.set(Calendar.MONTH, alarmMonth);
+        setCal.set(Calendar.YEAR, alarmYear);
+        alarmSetter(setCal, title, desc);
+    }
+
+    private void alarmSetter(Calendar alarm, String title, String desc){
+        AlarmManager alarmManager = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
+        Intent alarmIntent = new Intent(getContext(), DeadlineAlarmReceiver.class);
+        alarmIntent.putExtra("TITLE", title);
+        alarmIntent.putExtra("DESC", desc);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(), req_code, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP, alarm.getTimeInMillis(), pendingIntent);
     }
 
     @Override

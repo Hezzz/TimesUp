@@ -1,8 +1,11 @@
 package com.example.timesup_final_project;
 
+import android.app.AlarmManager;
 import android.app.DatePickerDialog;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
@@ -25,6 +28,8 @@ public class EditNoteDialogFragment extends AppCompatDialogFragment implements D
     private EditText editTitle, editDesc;
     private TextView cancel, editNote;
     private Button dateButton, timeButton;
+    public static int newAlarmMonth, newAlarmDay, newAlarmYear, newAlarmHour, newAlarmMinute;
+    private int old_req_code = 0, new_req_code = 0;
 
     public interface OnEditNote{
         void editNote(String newTitle, String newDesc, String newDate, String time);
@@ -49,6 +54,7 @@ public class EditNoteDialogFragment extends AppCompatDialogFragment implements D
         editDesc.setText(oldData.getString("DESC"));
         dateButton.setText(oldData.getString("DATE"));
         timeButton.setText(oldData.getString("TIME"));
+        old_req_code = oldData.getInt("OLD_REQ_CODE");
 
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,13 +63,16 @@ public class EditNoteDialogFragment extends AppCompatDialogFragment implements D
             }
         });
 
-        editNote.setOnClickListener(new View.OnClickListener() {
+        editNote.setOnClickListener(new View.OnClickListener(){
             @Override
-            public void onClick(View view) {
+            public void onClick(View view){
                 String title = editTitle.getText().toString();
                 String desc = editDesc.getText().toString();
-                if(!title.isEmpty() || !desc.isEmpty()){
+                if(!title.isEmpty()){
+                    if(desc.isEmpty()) desc = "Add description...";
+                    new_req_code = title.length() + desc.length();
                     Toast.makeText(getContext(), "Edited " + title, Toast.LENGTH_SHORT).show();
+                    setAlarm(title, desc);
                     onEditNote.editNote(title, desc, dateButton.getText().toString(), timeButton.getText().toString());
                 }
                 getDialog().dismiss();
@@ -100,7 +109,9 @@ public class EditNoteDialogFragment extends AppCompatDialogFragment implements D
     }
 
     @Override
-    public void onTimeSet(TimePicker timePicker, int hour, int minutes) {
+    public void onTimeSet(TimePicker timePicker, int hour, int minutes){
+        newAlarmHour = hour;
+        newAlarmMinute = minutes;
         String time;
         if(minutes < 10 ) time = hour + ":0" + minutes;
         else time = hour + ":" + minutes;
@@ -121,8 +132,39 @@ public class EditNoteDialogFragment extends AppCompatDialogFragment implements D
 
     @Override
     public void onDateSet(DatePicker datePicker, int year, int month, int day){
+        newAlarmYear = year;
+        newAlarmMonth = month;
+        newAlarmDay = day;
         String date = month + 1 + "/" + day + "/" + year;
         dateButton.setText(date);
+    }
+
+    private void setAlarm(String title, String desc){
+        Calendar current = Calendar.getInstance();
+        Calendar setCal = (Calendar)current.clone();
+        setCal.set(Calendar.HOUR_OF_DAY, newAlarmHour);
+        setCal.set(Calendar.MINUTE, newAlarmMinute);
+        setCal.set(Calendar.DAY_OF_MONTH, newAlarmDay);
+        setCal.set(Calendar.MONTH, newAlarmMonth);
+        setCal.set(Calendar.YEAR, newAlarmYear);
+        alarmSetter(setCal, title, desc);
+    }
+
+    private void alarmSetter(Calendar alarm, String title, String desc){
+        AlarmManager alarmManager = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
+        Intent alarmIntent = new Intent(getContext(), DeadlineAlarmReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(), old_req_code, alarmIntent, PendingIntent.FLAG_NO_CREATE);
+        if(pendingIntent != null) {
+            pendingIntent.cancel();
+            alarmManager.cancel(pendingIntent);
+        }
+
+        alarmIntent = new Intent(getContext(), DeadlineAlarmReceiver.class);
+        alarmIntent.putExtra("TITLE", title);
+        alarmIntent.putExtra("DESC", desc);
+        pendingIntent = PendingIntent.getBroadcast(getContext(), new_req_code, alarmIntent, PendingIntent.FLAG_CANCEL_CURRENT);
+
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP, alarm.getTimeInMillis(), pendingIntent);
     }
 
     @Override

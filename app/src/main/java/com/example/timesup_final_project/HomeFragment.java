@@ -1,7 +1,10 @@
 package com.example.timesup_final_project;
 
-
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
@@ -132,6 +135,8 @@ public class HomeFragment extends Fragment implements AddNoteDialogFragment.OnNo
                             oldData.putString("DESC", clickedDesc.getText().toString());
                             oldData.putString("DATE", clickedDate.getText().toString());
                             oldData.putString("TIME", clickedTime.getText().toString());
+                            oldData.putInt("OLD_REQ_CODE", clickedTitle.getText().toString().length()
+                                    + clickedDesc.getText().toString().length());
                             EditNoteDialogFragment editDialog = new EditNoteDialogFragment();
                             editDialog.setArguments(oldData);
                             editDialog.setTargetFragment(HomeFragment.this, 1);
@@ -159,6 +164,16 @@ public class HomeFragment extends Fragment implements AddNoteDialogFragment.OnNo
                     .setPositiveButton(R.string.delete, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i){
+                            AlarmManager alarmManager = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
+                            Intent alarmIntent = new Intent(getContext(), DeadlineAlarmReceiver.class);
+                            PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(),
+                                    ((TextView)view.findViewWithTag("TITLE")).getText().toString().length()
+                                    + ((TextView)view.findViewWithTag("DESC")).getText().toString().length(),
+                                    alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+                            if(pendingIntent != null) {
+                                pendingIntent.cancel();
+                                alarmManager.cancel(pendingIntent);
+                            }
                             deadlineDatabaseHelper.deleteDeadline(CurrentUser.getUserName(),
                                     ((TextView)view.findViewWithTag("TITLE")).getText().toString(),
                                     ((TextView)view.findViewWithTag("DESC")).getText().toString(),
