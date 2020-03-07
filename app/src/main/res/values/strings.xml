@@ -39,9 +39,31 @@
 
     <string name="subscribe"><u><i>Subscribe to get the latest features and updates!</i></u></string>
 
-    <string name="help_content">Hoho.. you have come for help!\n\nThe application is pretty simple, you press the <u>add floating button</u>
-        below at the home screen to add deadlines and reminders, write the title you wish and you can add some description if you want to,
-        set the date that you wish to be reminded then you are okay!\n\nThis app is hoped to be more furnished and updated.
+    <string name="help_content">Hoho.. you have come for help!\n\nThe application is pretty simple!!!\n\n
+        <b>Adding a new deadline:</b>\n
+        To add a deadline, you need to click the Add Button near below the device\'s screen.
+        A dialog will appear and will ask you about the deadline\'s title, you can also add
+        a short description to it.\n
+        Set the time and date by pressing the time and date texts at the dialog.\n
+        By pressing the \'Okay\' button, an alarm will be set according to your provided time\n\n
+        <b>Editing a deadline:</b>\n
+        To edit a deadline, simply click the deadline item in the list and a dialog will ask for confirmation.\n
+        You can update the title, description, date and time of the deadline you wish to.\n\n
+        <b>Deleting a deadline:</b>\n
+        If you wish to delete a deadline, simply long press the item you wish to and a dialog will ask for confirmation.\n
+        The alarm you\'ve set will also be deleted.\n\n
+        <b>Deleting all Deadlines:</b>\n
+        If you wish to delete all the deadlines you\'ve created, simply click the Menu button on the upper right of the screen,
+        and click \'Delete All\'.\n
+        However, a warning, this method will not delete all the alarms you\'ve set (a feature to be updated), so it is better to
+        individually delete each deadline you wish to.\n\n
+        <b>Viewing your profile:</b>\n
+        You can view your profile details through the Account Information in the Navigation Menu.\n
+        Additionally, you can see the current number of deadlines you have to accomplish!\n\n
+        <b>Editing your account:</b>\n
+        You can edit your profile details through the Account Settings in the Navigation Menu.\n
+        However, you can not edit your username and password.\n\n
+        This app is hoped to be more furnished and updated.
         \n\n<b>Keep programming!</b></string>
 
     <string name="about_desc">Time\'s Up is a deadline manager application developed for students

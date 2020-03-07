@@ -17,6 +17,7 @@ public class NotificationChannel extends Application {
                     NotificationManager.IMPORTANCE_HIGH
             );
             channel.setDescription("Channel ");
+            channel.setVibrationPattern(new long[]{2000, 2000, 2000, 2000, 2000});
             NotificationManager manager = getSystemService(NotificationManager.class);
             manager.createNotificationChannel(channel);
         }

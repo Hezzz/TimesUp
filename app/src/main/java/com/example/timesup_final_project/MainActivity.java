@@ -10,6 +10,9 @@ import androidx.navigation.NavController;
 import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
+
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -109,7 +112,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             })
                             .setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
                                 @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
+                                public void onClick(DialogInterface dialogInterface, int i){
                                     Toast.makeText(getApplicationContext(), R.string.delete_all_complete,
                                             Toast.LENGTH_SHORT).show();
                                     databaseHelper.deleteAll(CurrentUser.getUserName());

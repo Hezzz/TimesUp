@@ -20,7 +20,7 @@ public class DeadlineAlarmReceiver extends BroadcastReceiver {
                 .setContentInfo(context.getString(R.string.app_name))
                 .setCategory(NotificationCompat.CATEGORY_ALARM)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
-                .setVibrate(new long[]{1000, 500, 1000, 500, 2000})
+                .setVibrate(new long[]{2000, 2000, 2000, 2000, 2000})
                 .setSound(Settings.System.DEFAULT_NOTIFICATION_URI)
                 .setAutoCancel(true);
 
