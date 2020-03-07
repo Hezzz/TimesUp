@@ -10,7 +10,7 @@
     android:layout_marginTop="?attr/actionBarSize">
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/accountImage"
         android:layout_width="@dimen/half_logo"
         android:layout_height="@dimen/half_logo"
         android:src="@drawable/account_circle"
@@ -26,10 +26,10 @@
         android:layout_height="wrap_content"
         android:textColor="@color/colorAccent"
         android:textSize="@dimen/account_name"
-        android:text="UserName"
+        android:text="@string/sampleUserName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        app:layout_constraintTop_toBottomOf="@+id/accountImage"
         android:layout_marginTop="@dimen/account_desc"/>
 
     <TextView
@@ -38,7 +38,7 @@
         android:layout_height="wrap_content"
         android:textColor="@color/colorAccent"
         android:textSize="@dimen/dialog_desc_size"
-        android:text="Email"
+        android:text="@string/sampleEmail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/account_name" />
@@ -49,7 +49,7 @@
         android:layout_height="wrap_content"
         android:textColor="@color/colorAccent"
         android:textSize="@dimen/dialog_desc_size"
-        android:text="Contact No."
+        android:text="@string/sampleContactNo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/account_email" />
@@ -65,5 +65,30 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginBottom="@dimen/account_head_top"/>
+
+    <TextView
+        android:id="@+id/deadlineCountTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/account_head_top"
+        android:text="Number of Deadlines to be accomplished:"
+        android:textAlignment="center"
+        android:textColor="@color/colorAccent"
+        android:textSize="@dimen/account_deadline_count"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/account_contact" />
+
+    <TextView
+        android:id="@+id/deadlineCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="0"
+        android:textSize="@dimen/account_name"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/deadlineCountTitle" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

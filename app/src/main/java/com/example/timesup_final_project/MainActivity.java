@@ -27,18 +27,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
     private NavOptions navOptions;
+    static View headerView;
+    DatabaseHelper databaseHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.drawer_main_layout);
 
+        databaseHelper = new DatabaseHelper(this);
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         navigationView = findViewById(R.id.nav_view);
 
-        View headerView = navigationView.getHeaderView(0);
+        headerView = navigationView.getHeaderView(0);
         TextView usernameTitle = headerView.findViewById(R.id.userNameTitle);
         TextView emailAdd = headerView.findViewById(R.id.emailAddTitle);
         TextView contactno = headerView.findViewById(R.id.contactNoTitle);
@@ -88,6 +92,36 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         .setMessage(getString(R.string.help_content));
                 AlertDialog helpDialog = builder.create();
                 helpDialog.show();
+                return true;
+            }
+            case R.id.deleteAll:{
+                if(!databaseHelper.isEmpty(CurrentUser.getUserName())){
+                    Navigation.findNavController(this, R.id.nav_host_fragment).navigate(R.id.homeFragment);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this, R.style.DialogTheme)
+                            .setIcon(R.drawable.delete_all_icon)
+                            .setTitle(getString(R.string.delete_all_title))
+                            .setMessage(getString(R.string.delete_all_message))
+                            .setNeutralButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    Toast.makeText(getApplicationContext(), R.string.delete_cancelled, Toast.LENGTH_SHORT).show();
+                                }
+                            })
+                            .setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    Toast.makeText(getApplicationContext(), R.string.delete_all_complete,
+                                            Toast.LENGTH_SHORT).show();
+                                    databaseHelper.deleteAll(CurrentUser.getUserName());
+                                    Navigation.findNavController(MainActivity.this, R.id.nav_host_fragment).navigate(R.id.homeFragment);
+                                }
+                            });
+                    AlertDialog deleteDialog = builder.create();
+                    deleteDialog.show();
+                }
+                else{
+                    Toast.makeText(this, getString(R.string.no_deadline), Toast.LENGTH_SHORT).show();
+                }
                 return true;
             }
         }
@@ -157,7 +191,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 .setNeutralButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        Toast.makeText(getApplicationContext(), "Log-out cancelled.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), R.string.logout_cancelled, Toast.LENGTH_SHORT).show();
                     }
                 })
                 .setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener(){

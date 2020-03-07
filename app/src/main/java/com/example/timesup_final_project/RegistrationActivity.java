@@ -1,7 +1,9 @@
 package com.example.timesup_final_project;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Vibrator;
@@ -35,7 +37,7 @@ public class RegistrationActivity extends AppCompatActivity{
         confirmPass = findViewById(R.id.confirmPass);
 
         registerButton = findViewById(R.id.regButton);
-        registerButton.setOnClickListener(new View.OnClickListener() {
+        registerButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
                 if(username.getText().toString().isEmpty() || password.getText().toString().isEmpty() ||
@@ -44,34 +46,51 @@ public class RegistrationActivity extends AppCompatActivity{
                     confirmPass.getText().toString().isEmpty()){
                     Vibrator vibrator = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE);
                     vibrator.vibrate(400);
-                    Toast.makeText(getApplicationContext(), "Please fill all fields.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), R.string.fill_all, Toast.LENGTH_SHORT).show();
                 }
                 else{
                     if(password.getText().toString().equals(confirmPass.getText().toString())){
 
-                        UserClass user = new UserClass(username.getText().toString(),
-                                password.getText().toString(), firstname.getText().toString(),
-                                lastname.getText().toString(), email.getText().toString(),
-                                contactNo.getText().toString());
+                        AlertDialog.Builder builder = new AlertDialog.Builder(RegistrationActivity.this, R.style.DialogTheme)
+                                .setIcon(R.drawable.account_circle)
+                                .setTitle("Register Account?")
+                                .setMessage("Are you sure about your details")
+                                .setNeutralButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i){
+                                    }
+                                })
+                                .setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        UserClass user = new UserClass(username.getText().toString(),
+                                                password.getText().toString(), firstname.getText().toString(),
+                                                lastname.getText().toString(), email.getText().toString(),
+                                                contactNo.getText().toString());
 
-                        if (databaseHelper.insertUser(user)) {
-                            Intent backLogin = new Intent();
-                            backLogin.putExtra("USERNAME", username.getText().toString());
-                            backLogin.putExtra("PASSWORD", password.getText().toString());
-                            Toast.makeText(getApplicationContext(), "User created.", Toast.LENGTH_SHORT).show();
-                            setResult(Activity.RESULT_OK, backLogin);
-                            finish();
-                        }
-                        else{
-                            Vibrator vibrator = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE);
-                            vibrator.vibrate(400);
-                            Toast.makeText(getApplicationContext(), "User alreasy exists.", Toast.LENGTH_SHORT).show();
-                        }
+                                        if (databaseHelper.insertUser(user)){
+                                            Intent backLogin = new Intent();
+                                            backLogin.putExtra("USERNAME", username.getText().toString());
+                                            backLogin.putExtra("PASSWORD", password.getText().toString());
+                                            Toast.makeText(getApplicationContext(), R.string.user_created, Toast.LENGTH_SHORT).show();
+                                            setResult(Activity.RESULT_OK, backLogin);
+                                            finish();
+                                        }
+
+                                        else{
+                                            Vibrator vibrator = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE);
+                                            vibrator.vibrate(400);
+                                            Toast.makeText(getApplicationContext(), R.string.user_exists, Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                });
+                        AlertDialog registerUser = builder.create();
+                        registerUser.show();
                     }
                     else{
                         Vibrator vibrator = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE);
                         vibrator.vibrate(400);
-                        Toast.makeText(getApplicationContext(), "Password do not match.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), R.string.password_mismatch, Toast.LENGTH_SHORT).show();
                         confirmPass.setText("");
                         password.setText("");
                     }

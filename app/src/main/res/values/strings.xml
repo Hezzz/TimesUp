@@ -61,4 +61,19 @@
     <string name="deadline_deleted">Deadline deleted.</string>
     <string name="edit_deadline">Edit Deadline?</string>
     <string name="edit_question">Do you want to edit this?</string>
+    <string name="delete_all">Delete All</string>
+    <string name="delete_all_title">Delete All Deadlines?</string>
+    <string name="delete_all_message">Are you sure you want to delete all deadlines?</string>
+    <string name="logout_cancelled">Log-out cancelled.</string>
+    <string name="delete_all_complete">Deleted all deadlines...</string>
+    <string name="no_deadline">No deadlines to be deleted... Add one.</string>
+    <string name="sampleUserName">UserName</string>
+    <string name="sampleEmail">Email</string>
+    <string name="sampleContactNo">Contact No.</string>
+    <string name="edit_account">Edit Account Details?</string>
+    <string name="edit_account_message">Are you sure you want to edit your account?</string>
+    <string name="user_created">User created.</string>
+    <string name="user_exists">User already exists.</string>
+    <string name="password_mismatch">Password do not match.</string>
+    <string name="fill_all">Please fill all fields.</string>
 </resources>

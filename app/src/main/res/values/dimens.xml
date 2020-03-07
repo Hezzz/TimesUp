@@ -30,6 +30,7 @@
     <dimen name="account_name">32dp</dimen>
     <dimen name="account_head_top">36dp</dimen>
     <dimen name="account_desc">16dp</dimen>
+    <dimen name="account_deadline_count">28dp</dimen>
 
     <dimen name="about_margin">20dp</dimen>
     <dimen name="about_logo_size">200dp</dimen>

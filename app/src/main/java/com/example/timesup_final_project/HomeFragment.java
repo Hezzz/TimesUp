@@ -36,6 +36,7 @@ public class HomeFragment extends Fragment implements AddNoteDialogFragment.OnNo
         deadlineDatabaseHelper = new DatabaseHelper(getActivity());
         linearLayout = view.findViewById(R.id.deadlineList);
         deadlineList = deadlineDatabaseHelper.getDeadlines(CurrentUser.getUserName());
+        CurrentUser.setDeadlineCount(deadlineList.size());
 
         for(int i=0; i<deadlineList.size(); i++){
             View deadline = getLayoutInflater().inflate(R.layout.view_custom_row_deadline, linearLayout, false);
@@ -94,6 +95,8 @@ public class HomeFragment extends Fragment implements AddNoteDialogFragment.OnNo
         deadline.setOnClickListener(noteListener);
         deadline.setOnLongClickListener(noteDeleteListener);
         linearLayout.addView(deadline, 0);
+
+        CurrentUser.setDeadlineCount(CurrentUser.getDeadlineCount() + 1);
     }
 
     @Override
@@ -163,6 +166,7 @@ public class HomeFragment extends Fragment implements AddNoteDialogFragment.OnNo
                                     ((TextView)view.findViewWithTag("TIME")).getText().toString());
                             ((ViewGroup)view.getParent()).removeView(view);
                             Toast.makeText(getContext(),getString(R.string.deadline_deleted), Toast.LENGTH_SHORT).show();
+                            CurrentUser.setDeadlineCount(CurrentUser.getDeadlineCount() - 1);
                         }
                     });
             AlertDialog deleteDialog = builder.create();

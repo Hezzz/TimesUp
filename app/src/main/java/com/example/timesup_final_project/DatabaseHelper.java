@@ -121,6 +121,11 @@ public class DatabaseHelper extends SQLiteOpenHelper{
                 new String[]{username, task_title, task_desc, task_date, task_time});
     }
 
+    public void deleteAll(String username){
+        SQLiteDatabase database = this.getWritableDatabase();
+        database.delete(TASK_TABLE, TASK_COL_1 + " = ?", new String[]{username + ""});
+    }
+
     public void editDeadline(String username, String oldTitle, String oldDesc, String oldDate, String oldTime,
                              String newTitle, String newDesc, String newDate, String newTime){
         SQLiteDatabase database = this.getWritableDatabase();
@@ -133,6 +138,18 @@ public class DatabaseHelper extends SQLiteOpenHelper{
                 + TASK_COL_5 + " = ?";
         String whereArgs [] = new String[]{username, oldTitle, oldDesc, oldDate, oldTime};
         database.update(TASK_TABLE, values, whereClause, whereArgs);
+    }
+
+    public void updateUser(String username, String newFirstName, String newLastName,
+                           String newEmail, String newContactNo){
+        SQLiteDatabase database = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COL_3, newFirstName);
+        values.put(COL_4, newLastName);
+        values.put(COL_5, newEmail);
+        values.put(COL_6, newContactNo);
+        String whereClause = COL_1 + " = ?";
+        database.update(USER_TABLE, values, whereClause, new String[]{username + ""});
     }
 
     public List<Deadline>getDeadlines(String username){
@@ -153,5 +170,13 @@ public class DatabaseHelper extends SQLiteOpenHelper{
             }while(cursor.moveToNext());
         }
         return deadlineList;
+    }
+
+    public boolean isEmpty(String username){
+        SQLiteDatabase database = this.getReadableDatabase();
+        String query = "SELECT * FROM " + TASK_TABLE + " WHERE " + TASK_COL_1 + " = ?";
+        Cursor cursor = database.rawQuery(query, new String[]{username + ""});
+        if (cursor.getCount() == 0) return true;
+        else return false;
     }
 }

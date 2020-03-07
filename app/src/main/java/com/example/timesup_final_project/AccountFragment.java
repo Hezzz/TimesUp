@@ -14,7 +14,7 @@ public class AccountFragment extends Fragment {
 
     public AccountFragment() {}
 
-    private TextView account_name, account_email, account_contact;
+    private TextView account_name, account_email, account_contact, deadLineCount;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -25,11 +25,12 @@ public class AccountFragment extends Fragment {
         account_name = view.findViewById(R.id.account_name);
         account_email = view.findViewById(R.id.account_email);
         account_contact = view.findViewById(R.id.account_contact);
+        deadLineCount = view.findViewById(R.id.deadlineCount);
 
         account_name.setText(CurrentUser.getFirstname() + " " + CurrentUser.getLastname());
         account_email.setText(CurrentUser.getEmail());
         account_contact.setText(CurrentUser.getContactNo());
-
+        deadLineCount.setText(String.valueOf(CurrentUser.getDeadlineCount()));
         return view;
     }
 
